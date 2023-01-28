@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from . models import Produto, Tipo, Empresa
 from . forms import FormSearch
+from django.db.models import Q
 
 
 
@@ -8,11 +9,15 @@ from . forms import FormSearch
 
 def buscar(request):
     if request.method == 'POST':
+        
         form = FormSearch(request.POST)
         if form.is_valid():           
-            query = form.changed_data['buscar']       
-            result = Produto.objects.filter(codigo__contains==query or codigo_barras__contains==query)
-            return render(request, 'core/busca_resultado.html',{'resultado': result})
+            query = form.cleaned_data['buscar']      
+            produtos = Produto.objects.filter(
+                Q(codigo__contains=query) | Q(codigo_barras__contains=query)
+            ) 
+
+            return render(request, 'core/busca_resultado.html',{'result': produtos})
         
        
 
@@ -20,6 +25,13 @@ def buscar(request):
         form = FormSearch()
     
     return render(request, 'core/busca.html', {'form': form})
+
+
+def listar_produtos(request):
+    return render(request, )
+
+
+
 
 
 

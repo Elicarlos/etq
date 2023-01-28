@@ -23,7 +23,7 @@ class Tipo(Base):
 
 class Produto(Base):
     tipo = models.ForeignKey(Tipo, on_delete=models.PROTECT, null=True)
-    codigo = models.IntegerField(unique=True ,null=True)
+    codigo = models.CharField(unique=True ,null=True, max_length=100)
     descricao = models.CharField(max_length=100,null=True)
     preco = models.DecimalField(max_digits=10000, decimal_places=2)
     codigo_barras = models.CharField(max_length=100,null=True)
