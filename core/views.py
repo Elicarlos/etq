@@ -7,6 +7,10 @@ from django.db.models import Q
 
 # Create your views here.
 
+def index(request):
+    
+    return render(request, 'core/index.html')
+
 def buscar(request):
     if request.method == 'POST':
         
@@ -17,7 +21,7 @@ def buscar(request):
                 Q(codigo__contains=query) | Q(codigo_barras__contains=query)
             ) 
 
-            return render(request, 'core/busca_resultado.html',{'result': produtos})
+            return render(request, 'core/busca.html',{'produtos': produtos,'query': query})
         
        
 
