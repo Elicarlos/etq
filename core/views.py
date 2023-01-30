@@ -16,8 +16,8 @@ def index(request):
         if form.is_valid():           
             query = request.POST.get('buscar')
              
-            produtos = Produto.objects.get(
-                Q(codigo__contains=query) | Q(codigo_barras__contains=query)
+            produtos = Produto.objects.filter(
+                Q(codigo__exact=query) | Q(codigo_barras__exact=query)
             ) 
 
             return render(request, 'core/index.html',{'produtos': produtos,'query': query})
