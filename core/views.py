@@ -8,20 +8,45 @@ from django.db.models import Q
 # Create your views here.
 
 def index(request):
-    
-    return render(request, 'core/index.html')
-
-def buscar(request):
     if request.method == 'POST':
         
         form = FormSearch(request.POST)
+        
+        
         if form.is_valid():           
-            query = form.cleaned_data['buscar']      
+            query = request.POST.get('buscar')
+             
+            produtos = Produto.objects.get(
+                Q(codigo__contains=query) | Q(codigo_barras__contains=query)
+            ) 
+
+            return render(request, 'core/index.html',{'produtos': produtos,'query': query})
+        
+       
+
+    else:
+        form = FormSearch()
+    
+    return render(request, 'core/index.html', {'form': form})
+
+
+
+    
+    # return render(request, 'core/index.html')
+
+def buscar(request):
+    if request.method == 'POST':
+        print(request.POST.get('buscar'))
+        
+        form = FormSearch(request.POST)
+        if form.is_valid():           
+            query = form.cleaned_data['buscar']
+            print(query)      
             produtos = Produto.objects.filter(
                 Q(codigo__contains=query) | Q(codigo_barras__contains=query)
             ) 
 
-            return render(request, 'core/busca.html',{'produtos': produtos,'query': query})
+            return render(request, 'core/index.html',{'produtos': produtos,'query': query})
         
        
 
