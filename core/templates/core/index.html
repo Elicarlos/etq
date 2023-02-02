@@ -1,11 +1,11 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    {% include 'core/header.html' %}
     <div class="container">
         {% include 'core/formBusca.html' %}
         {% if query %}
             {% include 'core/lista-produtos.html' %}
+       
         {% endif %}
     </div>
     {% include 'core/footer.html' %}

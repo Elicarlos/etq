@@ -34,6 +34,12 @@ def index(request):
     
     # return render(request, 'core/index.html')
 
+def cadastro_produtos(request):
+    contexto = {
+        'formCadastroProdutos': 'teste'
+    }
+    return render(request, 'core/cadastro-produtos.html', contexto)
+
 def buscar(request):
     if request.method == 'POST':
         print(request.POST.get('buscar'))
@@ -57,7 +63,10 @@ def buscar(request):
 
 
 def listar_produtos(request):
-    return render(request, )
+    contexto = {
+        'produtos': Produto.objects.all()
+    }
+    return render(request, 'core/lista-produtos.html', contexto )
 
 
 

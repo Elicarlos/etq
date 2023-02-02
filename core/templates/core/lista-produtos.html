@@ -1,25 +1,37 @@
+{% extends 'core/base.html' %}
 {% block content %}
 {% for prod in produtos %}
 <div class="container">
-<table class="table">
-    <thead>
-      <tr>
-       
-        <th scope="col">descricao</th>
-        <th scope="col">preco</th>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">codigo</th>
+          <th scope="col">descricao</th>
+          <th scope="col">preco</th>
+          <th>Etiqueta</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ prod.codigo }}</td> 
+          <td>{{ prod.descricao }}</td>
+          <td>{{ prod.preco }}</td>
+          
+          <td>
+            <select id="cars" name="cars">
+              <option value="volvo">Volv11o</option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select>
+          </td>
+         
+          
+        </tr>
         
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        
-        <td>{{ prod.descricao }}</td>
-        <td>{{ prod.preco }}</td>
-        
-      </tr>
-      
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 </div>
 {% endfor %}
 
