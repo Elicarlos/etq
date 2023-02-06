@@ -17,8 +17,14 @@ class Empresa(Base):
     sif_sie = models.CharField(max_length=100)
     registro_adapi = models.CharField(max_length=100)
 
+    def __str__(self) -> str:
+        return self.filial
+
 class Tipo(Base):
     descricao = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return self.descricao
 
 
 class Produto(Base):
@@ -52,6 +58,9 @@ class Produto(Base):
     gluten = models.TextField(max_length=100,null=True)
     lactose = models.TextField(max_length=100,null=True)
     lote = models.TextField(max_length=100,null=True)
+
+    def __str__(self) -> str:
+        return self.descricao
 
 
 

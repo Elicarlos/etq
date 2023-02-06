@@ -3,10 +3,13 @@
 {% block content %}
     <div class="container">
         {% include 'core/formBusca.html' %}
-        {% if query %}
-            {% include 'core/lista-produtos.html' %}
-       
+        {% if produtos %}
+          {% for prod in produtos %}
+          {% include 'core/formPrint.html' %}
+          {% endfor %}
+        
         {% endif %}
     </div>
-    {% include 'core/footer.html' %}
+ 
+    
 {% endblock %}

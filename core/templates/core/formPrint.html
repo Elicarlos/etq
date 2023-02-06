@@ -1,0 +1,29 @@
+
+
+{% block content %}
+<form class="d-flex" id="form" method="post" action="{% url 'printer' %}" style="margin-bottom: 50px;">
+  {% csrf_token %}
+  <input class="form-control me-2" value="{{ prod.id }}" type="hidden" name="id" placeholder="Tipo de Carne" aria-label="tipo de corte"> 
+  <input class="form-control me-2" value="{{ prod.tipo.descricao }}" type="text" name="tipo" placeholder="Tipo de Carne" aria-label="tipo de corte">
+  <input class="form-control me-2" value="{{ prod.descricao}}" type="text" name="descricao" placeholder="Corte" aria-label="corte">
+  <input class="form-control me-2" type="date" name="data_embalagem" placeholder="Data Embalagem" required aria-label="data-embalagem">
+  <input class="form-control me-2" type="date" name="validade" placeholder="quantidade" required aria-label="quantidade">
+  <input class="form-control me-2" type="number" name="quantidade" placeholder="quantidade" required aria-label="validade">
+
+  <select class="form-control me-2" name="printer" id="print-select">
+    {% for choice in FormPrint.printer.field.choices %}
+    <option  value="{{ choice.0 }}">{{ choice.1 }}</option>
+    {% endfor %}
+    <!-- <input class="form-control me-2" value="{{label}}" type="text" name="tipo-etiqueta" placeholder="Etiqueta" aria-label="etiqueta"> -->
+  </select>
+  
+  <select class="form-control me-2" name="label" id="label-select">
+    {% for choice in FormPrint.label.field.choices %}
+    <option  value="{{ choice.0 }}">{{ choice.1 }}</option>
+    {% endfor %}
+    <!-- <input class="form-control me-2" value="{{label}}" type="text" name="tipo-etiqueta" placeholder="Etiqueta" aria-label="etiqueta"> -->
+  </select>
+  
+  <button class="btn btn-outline-success" type="submit">Imprimir</button>
+</form>
+{% endblock %}
